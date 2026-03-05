@@ -1,0 +1,68 @@
+package Array;
+
+import java.util.*;
+
+public class A9 {
+	public void printArray(int[] a) {
+		for (int i : a) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
+	}
+	public int[] unionOfTwoSortedArray(int[] a, int[] b) {
+		int n = a.length;
+		int m = b.length;
+		int[] newArray = new int[n + m];
+		
+		int i = 0, j = 0, k = 0;
+		 
+		while (j < n || k < m) {
+			if (j < n && k < m) {
+				if (a[j] < b[k]) {
+					if (i == 0 || newArray[i - 1] != a[j])
+						newArray[i++] = a[j++];
+				} else {
+					if (i == 0 || newArray[i - 1] != b[k])
+						newArray[i++] = b[k++];
+				}
+			} else if (k < m) {
+				if (i == 0 || newArray[i - 1] != b[k])
+					newArray[i++] = b[k++];
+			} else {
+				if (i == 0 || newArray[i - 1] != a[j])
+					newArray[i++] = a[j++];
+			}
+		}
+		return newArray;
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter the size of first array : ");
+		int n = sc.nextInt();
+		
+		System.out.println("Enter the size of second array : ");
+		int m = sc.nextInt();
+		
+		int[] a = new int[n];
+		int[] b = new int[m];
+		
+		for (int i = 0; i < n; i++) {
+			a[i] = sc.nextInt();
+		}
+		
+		for (int i = 0; i < m; i++) {
+			b[i] = sc.nextInt();
+		}
+		
+		int[] newArray = new int[n + m];
+		A9 p = new A9();
+		newArray = p.unionOfTwoSortedArray(a, b);
+		p.printArray(newArray);
+
+	}
+
+}
