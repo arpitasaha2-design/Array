@@ -1,0 +1,48 @@
+package BinarySearch;
+
+import java.util.Arrays;
+
+public class B21 {
+	
+	public boolean distanceIsPossible(int[] arr, int k, int d) {
+		int cnt = 1;
+		int n = arr.length, curNum = 0;
+		for (int i = 1; i < n; i++) {
+			int dist = (arr[i] - arr[curNum]);
+			if (dist < d) {
+				continue;
+			} else {
+				curNum = i;
+				cnt++;
+			}
+		}
+		return cnt >= k;
+	}
+	
+	public int func(int[] arr, int k) {
+		Arrays.sort(arr);
+		int n = arr.length;
+		int l = 1, r = arr[n - 1] - arr[0];
+		while (l <= r) {
+			int mid = (r + l) / 2;
+			boolean isPossible = distanceIsPossible(arr, k, mid);
+			if (isPossible) {
+				l = mid + 1;
+			} else {
+				r = mid - 1;
+			}
+		}
+		return r;
+	}
+	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] arr = {0, 3, 4, 7, 10, 9};
+		int k = 4;
+		B21 b = new B21();
+		System.out.println(b.func(arr, k));
+
+	}
+
+}
